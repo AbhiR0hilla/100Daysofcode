@@ -1,5 +1,4 @@
-import time
-# Define the recipes for drinks
+import time # Defining the recipes for drinks
 latte = {
     'milk': 150,
     'water': 200,
@@ -25,7 +24,7 @@ resource = {
     'coffee': 30
 }
 
-def money(choice):      #money  function to track the change and total
+def money(choice):          #money  function to track the change,total and also make sure the user is having enough coins
     print("Please insert the coins.")
     quart = int(input("Enter the number of quarts: "))
     nick = int(input("Enter the number of nickles: "))
@@ -68,15 +67,14 @@ def buycoffee(choice):
          print(f"Left amount is: milk= {resource['milk']}mL, water= {resource['water']}mL,"
                f" "f"coffee= {resource['coffee']}gm,revenue=${resource['profit']}")
          return 0
-    if all(resource[key]>recipe[key] for key in recipe):
+    if all(resource[key]>recipe[key] for key in recipe):  
         for key in recipe:
-            resource[key] -= recipe[key]
+            resource[key] -= recipe[key]          #Decreases what resource has been used from resource dict
         return True
-    else:
+    else:             # Checks if resources are sufficient
         missing=[key for key in recipe if resource[key] < recipe[key]]
         print("we have ran out of: ", ','.join(missing))
-    # Check if resources are sufficient
-    
+     
 print('''\033[33m
          )))
         (((
@@ -89,12 +87,11 @@ print('''\033[33m
       Latte ($2.50)
       Cappuccino ($3.00)
       ------------------
-
       PS: Type "report" at any moment
       to check our resources available.
       Type "off" to log out from the machine.\033[m
     ''')
-while True:
+while True:                   #main while loop for running the coffee machine for the next user in line
     choice = input("What would you like latte, capuccino, espresso or freshmilk? ").lower()
     coffeoption=['milk','espreso','latte','report','capucino','off']
     if choice == "off":
