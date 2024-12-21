@@ -33,7 +33,7 @@ def money(choice):      #money  function to track the change and total
     total = quart * 25 + nick * 5 + dime * 10 + pennies
     prices = {"latte": 250, "espreso": 180, "capucino": 200, "milk":100}
     final = total - prices[choice]
-    if resource['coffee']>17 and resource['water']>49 and resource['milk']>99:
+    if resource['coffee']>17 and resource['water']>49 and resource['milk']>99 total>prices[choice]:
             if final==0:
                 print(f"Here is your {choice}☕")
             elif final>0:
