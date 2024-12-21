@@ -1,0 +1,95 @@
+import time
+# Define the recipes for drinks
+latte = {
+    'milk': 150,
+    'water': 200,
+    'coffee': 24,
+}
+capucino = {
+    'milk': 100,
+    'water': 250,
+    'coffee': 24
+}
+espreso = {
+    'water': 50,
+    'coffee': 18
+}
+cold_milk={
+    'milk':150
+}
+# Define the initial resources
+resource = {
+    'profit':0,
+    'milk': 2000,
+    'water': 1000,
+    'coffee': 30
+}
+def money(choice):      #money  function to track the change and total
+    print("Please insert the coins.")
+    quart = int(input("Enter the number of quarts: "))
+    nick = int(input("Enter the number of nickles: "))
+    dime = int(input("Enter the number of dimes: "))
+    pennies = int(input("Enter the number of pennies: "))
+    total = quart * 25 + nick * 5 + dime * 10 + pennies
+    prices = {"latte": 250, "espreso": 180, "capucino": 200, "milk":100}
+    final = total - prices[choice]
+    if resource['coffee']>17 and resource['water']>49 and resource['milk']>99:
+            if final==0:
+                print(f"Here is your {choice}☕")
+            elif final>0:
+                print("Here is your change:$", final/100)
+                time.sleep(0.5)
+                print(f"Here is your {choice}☕")
+    elif total<prices[choice]:
+        print("Insufficient fund, please insert more coins!")
+        print("Here is your change:$", total / 100)
+    else:
+        print("...")
+def buycoffee(choice):
+    global resource,recipe
+    if choice == "latte":
+        recipe = latte
+        resource['profit']+=2.50
+        money(choice)
+    elif choice == "capucino":
+        recipe = capucino
+        resource['profit'] += 2.00
+        money(choice)
+    elif choice =="espreso":
+        recipe = espreso
+        resource['profit'] += 1.80
+        money(choice)
+    elif choice == "milk":
+        recipe=cold_milk
+        resource['profit'] += 1.00
+        money(choice)
+    elif choice=="report":
+         print(f"Left amount is: milk= {resource['milk']}mL, water= {resource['water']}mL,"
+               f" "f"coffee= {resource['coffee']}gm,revenue=${resource['profit']}")
+         return 0
+    if all(resource[key]>recipe[key] for key in recipe):
+        for key in recipe:
+            resource[key] -= recipe[key]
+        return True
+    else:
+        missing = [key for key in recipe if resource[key] < recipe[key]]
+        print("we have ran out of: ", ','.join(missing))
+    # Check if resources are sufficient
+
+while True:
+    choice = input("What would you like latte, capuccino, espresso or freshmilk? ").lower()
+    coffeoption=['milk','espreso','latte','report','capucino','off']
+    if choice == "off":
+        print("Coffee machine is turning off... Ciao!")
+        break
+    elif choice not in coffeoption:
+        print("Please, enter something valid")
+        break
+    elif resource['milk']==0 or resource['water']==0 or resource['coffee']==0:
+        print("We have ran out of milk or water")
+        break
+    buycoffee(choice)
+
+
+
+
