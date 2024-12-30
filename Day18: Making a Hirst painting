@@ -1,0 +1,42 @@
+from turtle import Screen
+import turtle as t
+import random
+
+# Set up turtle and colormode
+timmy = t.Turtle()
+t.colormode(255)
+Screen().bgcolor('Antiquewhite2')
+screen=Screen()
+
+def randcolor():                # Function to generate a random color
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    return (r, g, b)
+
+def draw_filled_circle(timmy, radius):  # Generate a random color # RGB values
+   
+    timmy.color(randcolor())  # Set the fill color
+    timmy.begin_fill()
+    timmy.circle(radius)  # Draw the circle
+    timmy.end_fill()
+
+def main():       #main function for drawing the circles in even spaces
+    timmy.hideturtle() 
+    radius=7
+    timmy.speed(20)
+    y=300
+    for i in range(20):
+        timmy.penup()
+        timmy.goto(-350,y)
+        for i in range(15):
+            draw_filled_circle(timmy,radius)
+            timmy.color('Antiquewhite2')
+            timmy.forward(50)
+        y-=50
+        timmy.pendown() 
+    screen.mainloop()
+    Screen().exitonclick()
+
+main()
+
