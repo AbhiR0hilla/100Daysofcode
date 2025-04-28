@@ -1,0 +1,1 @@
+Script for cleaning any pdf,img,excel or word file in any partifular directory on the PC
